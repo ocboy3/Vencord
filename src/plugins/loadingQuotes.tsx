@@ -103,12 +103,14 @@ const settings = definePluginSettings({
         description: "Your custom quotes list",
         type: OptionType.COMPONENT,
         component: () => {
+            const onUpdate = useForceUpdater();
             return (
                 <>
                     <QuotesList
                         title="Quotes"
                         quotesArray={regexRules}
                         key={QUOTES_LIST_KEY}
+                        update={onUpdate}
                     />
                 </>
             );
