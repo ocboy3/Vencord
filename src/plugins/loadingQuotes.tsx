@@ -190,8 +190,7 @@ function QoutesList({ title, quotesArray, key }: TextReplaceProps) {
             </Flex>
         </>
     );
-}
-
+};
 
 export default definePlugin({
     name: "LoadingQuotes",
@@ -220,13 +219,15 @@ export default definePlugin({
             quotes.forEach((quoteToAdd) => {
                 quotesListToUse.push(this.xor(quoteToPush));
             });
-        }
-        // Remove trailing spaces and newlines from settings.store.customQuotesList
+        };
 
-        quotesListData = await DataStore.get(QUOTES_LIST_KEY) ?? makeEmptyQuoteArray();
+        async function getQuotesList() {
+            return (await DataStore.get(QUOTES_LIST_KEY)) ?? makeEmptyQuoteArray();
+        };
 
+        quotesListData = getQuoteList(); //await DataStore.get(QUOTES_LIST_KEY) ?? makeEmptyQuoteArray();
         console.log(quotesListData);
 
-        return quotesListToUse[Math.floor(Math.random() * quotes.length)];
+        return quotesListToUse[Math.floor(Math.random() * quotesListToUse.length)];
     }
 });
