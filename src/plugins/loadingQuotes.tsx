@@ -221,11 +221,11 @@ export default definePlugin({
             });
         };
 
-        async function getQuotesList() {
-            return (await DataStore.get(QUOTES_LIST_KEY)) ?? makeEmptyQuoteArray();
-        };
+        //async function getQuotesList() {
+        //    return (await DataStore.get(QUOTES_LIST_KEY)) ?? makeEmptyQuoteArray();
+        //}
 
-        quotesListData = getQuoteList(); //await DataStore.get(QUOTES_LIST_KEY) ?? makeEmptyQuoteArray();
+        quotesListData = []; //this.getQuoteList(); //await DataStore.get(QUOTES_LIST_KEY) ?? makeEmptyQuoteArray();
         console.log(quotesListData);
 
         return quotesListToUse[Math.floor(Math.random() * quotesListToUse.length)];
