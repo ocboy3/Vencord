@@ -78,6 +78,13 @@ interface QuoteEntry {
     text: string;
 }
 
+interface QuoteProps {
+    title: string;
+    quotesArray: QuoteEntry[];
+    key: string;
+    update: () => void;
+}
+
 const makeEmptyQuote: () => QuoteEntry = () => ({
     text: "",
 });
@@ -126,7 +133,7 @@ function Input({ initialValue, onChange, placeholder }: {
     );
 }
 
-function QoutesList({ title, quotesArray, key }: TextReplaceProps) {
+function QoutesList({ title, quotesArray, key }: QuoteProps) {
     async function onClickRemove(index: number) {
         if (index === quotesArray.length - 1) return;
         quotesArray.splice(index, 1);
