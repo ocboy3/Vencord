@@ -163,7 +163,7 @@ function QuotesList({ title, quotesArray, key }: QuoteProps) {
             <Forms.FormTitle tag="h4">{title}</Forms.FormTitle>
             <Flex flexDirection="column" style={{ gap: "0.5em" }}>
                 {
-                    quotesAeray.map((quote, index) =>
+                    quotesArray.map((quote, index) =>
                         <React.Fragment key={`${quote.text}-${index}`}>
                             <Flex flexDirection="row" style={{ gap: 0 }}>
                                 <Flex flexDirection="row" style={{ flexGrow: 1, gap: "0.5em" }}>
