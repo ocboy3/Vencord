@@ -225,7 +225,7 @@ export default definePlugin({
         //    return (await DataStore.get(QUOTES_LIST_KEY)) ?? makeEmptyQuoteArray();
         //}
 
-        quotesListData = []; //this.getQuoteList(); //await DataStore.get(QUOTES_LIST_KEY) ?? makeEmptyQuoteArray();
+        var quotesListData = []; //this.getQuoteList(); //await DataStore.get(QUOTES_LIST_KEY) ?? makeEmptyQuoteArray();
         console.log(quotesListData);
 
         return quotesListToUse[Math.floor(Math.random() * quotesListToUse.length)];
