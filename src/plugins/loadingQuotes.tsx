@@ -74,9 +74,11 @@ const quotes = [
 // Kinda took the inspiration for the multiple entry boxes from TextReplace
 // becaue I couldn't type in multiple lines in a string area.
 
-interface QuoteEntry {
-    text: string;
-}
+// interface QuoteEntry {
+//     text: string;
+// }
+
+type QuoteEntry = Record<"text", string>;
 
 interface QuoteProps {
     title: string;
@@ -107,7 +109,7 @@ const settings = definePluginSettings({
                 <>
                     <QuotesList
                         title="Quotes"
-                        quotesArray={regexRules}
+                        quotesArray={emptyQuoteArray}
                         key={QUOTES_LIST_KEY}
                         update={onUpdate}
                     />
