@@ -16,8 +16,10 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import { definePluginSettings, Settings } from "@api/Settings";
 import { Devs } from "@utils/constants";
-import definePlugin from "@utils/types";
+import definePlugin, { OptionType } from "@utils/types";
+import settings from "./_core/settings";
 
 // These are Xor encrypted to prevent you from spoiling yourself when you read the source code.
 // don't worry about it :P
@@ -59,10 +61,24 @@ const quotes = [
     "snofplkb{)c'r\"lod'|f*aurv#cpno`abchijklmno"
 ];
 
+const settings = definePluginSettings({
+    useDefaultQuotes: {
+        description: "Use plugin's default quotes alongside your ones.",
+        type: OptionType.BOOLEAN,
+        default: true
+    },
+    customQuotesList: {
+        description: "Your custom quotes list. Add one quote per line to randomly choose from.",
+        type: OptionType.STRING,
+        default: ""
+    }
+});
+
 export default definePlugin({
     name: "LoadingQuotes",
     description: "Replace Discords loading quotes",
-    authors: [Devs.Ven, Devs.KraXen72],
+    authors: [Devs.Ven, Devs.KraXen72, Devs.OCbwoy3],
+    settings,
     patches: [
         {
             find: ".LOADING_DID_YOU_KNOW",
@@ -80,6 +96,20 @@ export default definePlugin({
     },
 
     get quote() {
-        return this.xor(quotes[Math.floor(Math.random() * quotes.length)]);
+        var quotesListToUse = [];
+        if (settings.store.useDefaultQuotes) {
+            quotes.forEach((quoteToAdd) => {
+                quotesListToUse.push(this.xor(quoteToPush));
+            });
+        }
+        // Remove trailing spaces and newlines from settings.store.customQuotesList
+        settings.store.customQuotesList.replace(/\n$+/, '').split('\n').forEach(
+            (customQuote) => {
+                quotesListToUse.push(
+                    customQuote.replace(/[ \t]+$/g, '')
+                );
+            }
+        );
+        return quotesListToUse[Math.floor(Math.random() * quotes.length)];
     }
 });
