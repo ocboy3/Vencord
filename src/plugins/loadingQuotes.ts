@@ -103,13 +103,16 @@ export default definePlugin({
             });
         }
         // Remove trailing spaces and newlines from settings.store.customQuotesList
-        settings.store.customQuotesList.replace(/\n$+/, '').split('\n').forEach(
-            (customQuote) => {
-                quotesListToUse.push(
-                    customQuote.replace(/[ \t]+$/g, '')
-                );
-            }
-        );
+
+        // lemme fix this
+
+        // settings.store.customQuotesList.replace(/\n+$/g, '').split('\n').forEach(
+        //     (customQuote) => {
+        //         quotesListToUse.push(
+        //             customQuote.replace(/[ \t]+$/g, '')
+        //         );
+        //     }
+        // );
         return quotesListToUse[Math.floor(Math.random() * quotes.length)];
     }
 });
