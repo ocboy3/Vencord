@@ -100,7 +100,6 @@ const settings = definePluginSettings({
         default: true
     },
     customQuotesList: {
-        description: "Your custom quotes list",
         type: OptionType.COMPONENT,
         component: () => {
             const onUpdate = useForceUpdater();
@@ -135,7 +134,7 @@ function Input({ initialValue, onChange, placeholder }: {
     );
 }
 
-function QoutesList({ title, quotesArray, key }: QuoteProps) {
+function QuotesList({ title, quotesArray, key }: QuoteProps) {
     async function onClickRemove(index: number) {
         if (index === quotesArray.length - 1) return;
         quotesArray.splice(index, 1);
