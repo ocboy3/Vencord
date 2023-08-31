@@ -78,21 +78,6 @@ const quotes = [
 //     text: string;
 // }
 
-type QuoteEntry = Record<"text", string>;
-
-interface QuoteProps {
-    title: string;
-    quotesArray: QuoteEntry[];
-    key: string;
-    update: () => void;
-}
-
-const makeEmptyQuote: () => QuoteEntry = () => ({
-    text: "",
-});
-const makeEmptyQuoteArray = () => [makeEmptyQuote()];
-
-let emptyQuoteArray = makeEmptyQuoteArray();
 const QUOTES_LIST_KEY = "LoadingQuotes_QuotesList";
 
 const settings = definePluginSettings({
@@ -136,6 +121,10 @@ function Input({ initialValue, onChange, placeholder }: {
     );
 }
 
+class QuoteProps {
+    text: string;
+}
+
 function QuotesList({ title, quotesArray, key }: QuoteProps) {
     async function onClickRemove(index: number) {
         if (index === quotesArray.length - 1) return;
@@ -176,16 +165,7 @@ function QuotesList({ title, quotesArray, key }: QuoteProps) {
                                 <Button
                                     size={Button.Sizes.MIN}
                                     onClick={() => onClickRemove(index)}
-                                    style={{
-                                        background: "none",
-                                        ...(index === quotesArray.length - 1
-                                            ? {
-                                                visibility: "hidden",
-                                                pointerEvents: "none"
-                                            }
-                                            : {}
-                                        )
-                                    }}
+                                    style={{ background: "none", ...(index === quotesArray.length - 1 ? { visibility: "hidden", pointerEvents: "none" } : {}) }}
                                 >
                                     <svg width="24" height="24" viewBox="0 0 24 24">
                                         <title>Delete Qoute</title>
