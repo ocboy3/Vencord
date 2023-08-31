@@ -154,14 +154,12 @@ function QuotesList({ title, quotesArray, key }: QuoteProps) {
                 {
                     quotesArray.map((quote, index) =>
                         <React.Fragment key={`${quote.text}-${index}`}>
+                            <Input
+                                placeholder="Text"
+                                initialValue={quote.text}
+                                onChange={e => onChange(e, index, "text")}
+                            />
                             <Flex flexDirection="row" style={{ gap: 0 }}>
-                                <Flex flexDirection="row" style={{ flexGrow: 1, gap: "0.5em" }}>
-                                    <Input
-                                        placeholder="Text"
-                                        initialValue={quote.text}
-                                        onChange={e => onChange(e, index, "text")}
-                                    />
-                                </Flex>
                                 <Button
                                     size={Button.Sizes.MIN}
                                     onClick={() => onClickRemove(index)}
